@@ -51,7 +51,7 @@ function App() {
 
   return (
     loading === true
-    ? <h2>Loading...</h2>
+    ? <h2>Loading...</h2> //todo nice full screen spinner
     : (
       <Router>
         <Switch>
