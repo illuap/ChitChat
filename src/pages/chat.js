@@ -13,10 +13,10 @@ function Chat(props){
         SetReadError(null);
         try{
             // .on opens a live connection to firebase so messages will be updated in real time
-            db.ref("chats").on("value", snapshot =>{
+            db.collection("chats").orderBy('timestamp').onSnapshot((snapshot) => {
                 let chatMsgs = [];
                 snapshot.forEach((snap) => {
-                    chatMsgs.push(snap.val());
+                    chatMsgs.push(snap.data());
                 });
                 SetChats(chatMsgs);
             })
@@ -33,8 +33,7 @@ function Chat(props){
         e.preventDefault();
         SetWriteError(null);
         try{
-            console.log(msg);
-            await db.ref("chats").push({
+            await db.collection("chats").add({
                 content: msg,
                 timestamp: Date.now(),
                 uid: user.uid
@@ -49,7 +48,10 @@ function Chat(props){
         <div>
             <div className="chats">
                 {chats.map(chat => {
-                    return <p key={chat.timestamp}> {chat.uid?<strong>{chat.uid}</strong>:null} {chat.content}</p>
+                    return <p key={chat.timestamp}> 
+                        {chat.uid?<strong>{chat.uid} </strong>:null} 
+                        {chat.content} - {new Date(chat.timestamp).toLocaleString()}
+                    </p>
                 })}
                 {readError ?<p>{readError}</p>: null}
             </div>
