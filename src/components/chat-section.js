@@ -1,6 +1,8 @@
 import React, {Component, useEffect, useState} from "react";
+import {Input, Button} from "antd";
 import {auth, db} from "../services/firebase";
 
+import '../style/chat-section.scss';
 
 function ChatSection(props){
     const [user, SetUser] = useState(auth().currentUser);
@@ -46,6 +48,8 @@ function ChatSection(props){
 
     return(
         <div>
+            <h1>Chat Room: </h1>
+            <hr></hr>
             <div className="chats">
                 {chats.map(chat => {
                     return <p key={chat.timestamp}> 
@@ -55,11 +59,11 @@ function ChatSection(props){
                 })}
                 {readError ?<p>{readError}</p>: null}
             </div>
-            <div>
+            <div className="message-input">
                 <form onSubmit={handleSubmit}>
-                    <input onChange={handleChange} value={msg}></input>
+                    <Input onChange={handleChange} value={msg}></Input>
                     {writeError ?<p>{writeError}</p>: null}
-                    <button type="submit">Send</button>
+                    <Button type="submit">Send</Button>
                 </form>
             </div>
             <div>
