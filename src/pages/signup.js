@@ -1,29 +1,36 @@
 import React, {Component, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {signup } from '../helpers/auth';
+import { db } from '../services/firebase';
 
 function SignUp(props){
     const [error, SetError] = useState('');
+    const [fname,SetFName] = useState('');
+    const [lname, SetLName] = useState('');
+    const [username, SetUsername] = useState('');
     const [email, SetEmail] = useState('');
     const [password, SetPassword] = useState('');
     
     const handleChange = e => {
-        if(e.name =='email'){
-            SetEmail(e.value);
+        if(e.target.name ==='email'){
+            SetEmail(e.target.value);
         }
-        else if(e.name == 'password'){
-            SetPassword(e.value);
+        else if(e.target.name === 'password'){
+            SetPassword(e.target.value);
+        }else if (e.target.name ==='username'){
+            SetUsername(e.target.value);
         }
     }
     const handleSubmit = async e => {
         e.preventDefault();
+
         try{
-            await signup(email,password);
+            await signup(email,password,username);
         }catch(err){
             SetError(err.message);
         }
+    
     }
-
     return(
         <div>
             <form onSubmit={handleSubmit}>
@@ -32,7 +39,9 @@ function SignUp(props){
                 </h1>
 
                 {error ? <p>{error}</p> : null}
-
+                <div>
+                    <input placeholder="Username" name="username" onChange={handleChange} value={username}></input>
+                </div>
                 <div>
                     <input placeholder="Email" name="email" type="email" onChange={handleChange} value={email}></input>
                 </div>

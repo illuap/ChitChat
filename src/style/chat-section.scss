@@ -1,6 +1,52 @@
 
 @import './shared.scss';
 
+section{
+    height: 100%;
+}
+header{
+
+}
+
+
 .message-input{
+    display: block;
+    width: 100%;
     background: $test-color;
+}
+.chat-wrapper{
+    height: 100%;
+}
+.chats{
+    height: -webkit-calc(100% - 100px);
+    height:    -moz-calc(100% - 100px);
+    height:         calc(100% - 100px);
+    overflow-y: scroll;
+
+
+}
+
+.chat-sent,
+.chat-received{
+    width: 100%;
+    .message{
+        max-width: 500px;
+    }
+}
+.chat-sent{
+    float:right;
+    text-align: right;
+
+    .message{
+        float: right;
+        background-color: $sent-color;
+    }
+}
+.chat-received{
+    float:left;
+    text-align: left;
+    .message{
+        float:left;
+        background-color: $received-color;
+    }
 }

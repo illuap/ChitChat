@@ -1,5 +1,6 @@
 import React, {Component, useEffect, useState} from "react";
 import ChatSection from '../components/chat-section'
+import { signOut } from '../helpers/auth'
 import {  Layout, Menu  } from "antd";
 import {
   MenuUnfoldOutlined,
@@ -32,6 +33,10 @@ function Chat(props){
             </Menu.Item>
             <Menu.Item key="3" icon={<UploadOutlined />}>
               nav 3
+            </Menu.Item>
+            
+            <Menu.Item key="4" onClick={signOut} icon={<UploadOutlined />}>
+              Sign Out
             </Menu.Item>
           </Menu>
         </Sider>

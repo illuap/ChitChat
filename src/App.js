@@ -11,7 +11,7 @@ import Signup from './pages/signup';
 import Login from './pages/login';
 import {auth} from './services/firebase';
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 
 function PrivateRoute({component: Component, authenticated, ...rest}){
   return(

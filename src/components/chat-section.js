@@ -1,5 +1,5 @@
 import React, {Component, useEffect, useState} from "react";
-import {Input, Button} from "antd";
+import {Input, Button, Col, Row  } from "antd";
 import {auth, db} from "../services/firebase";
 
 import '../style/chat-section.scss';
@@ -47,23 +47,31 @@ function ChatSection(props){
     }
 
     return(
-        <div>
+        <div className="chat-wrapper">
             <h1>Chat Room: </h1>
             <hr></hr>
             <div className="chats">
                 {chats.map(chat => {
-                    return <p key={chat.timestamp}> 
-                        {chat.uid?<strong>{chat.uid} </strong>:null} 
+                    return <div className={user.uid == chat.uid ? 'chat-sent': 'chat-received'}>
+                        <h3>{chat.uid?<strong>{chat.uid} </strong>:null} </h3>
+                        <p className="message" key={chat.timestamp}> 
                         {chat.content} - {new Date(chat.timestamp).toLocaleString()}
-                    </p>
+                        </p>
+                    </div>
                 })}
                 {readError ?<p>{readError}</p>: null}
             </div>
             <div className="message-input">
                 <form onSubmit={handleSubmit}>
-                    <Input onChange={handleChange} value={msg}></Input>
-                    {writeError ?<p>{writeError}</p>: null}
-                    <Button type="submit">Send</Button>
+                    <Row>
+                    <Col span={18}>
+                        <Input onChange={handleChange} value={msg}></Input>
+                        {writeError ?<p>{writeError}</p>: null}
+                    </Col>
+                    <Col span={6}>
+                        <Button block type="primary" htmlType="submit">Send</Button>
+                    </Col>
+                    </Row>
                 </form>
             </div>
             <div>
