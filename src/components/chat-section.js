@@ -74,8 +74,9 @@ function ChatSection(props){
                     return <div className={user.uid == chat.userRef.id ? 'chat-sent': 'chat-received'}>
                         <h3>{<strong>{chat.username} </strong>} </h3>
                         <p className="message" key={chat.timestamp}> 
-                        {chat.content} - {new Date(chat.timestamp).toLocaleString()}
+                        {chat.content} 
                         </p>
+                        <span className="time"> {new Date(chat.timestamp).toLocaleString()}</span>
                     </div>
                 })}
                 {readError ?<p>{readError}</p>: null}

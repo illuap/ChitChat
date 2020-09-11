@@ -9,16 +9,17 @@ function Login(props){
     const [password, SetPassword] = useState('');
     
     const handleChange = e => {
-        if(e.name =='email'){
-            SetEmail(e.value);
+        if(e.target.name === 'email'){
+            SetEmail(e.target.value);
         }
-        else if(e.name == 'password'){
-            SetPassword(e.value);
+        else if(e.target.name === 'password'){
+            SetPassword(e.target.value);
         }
     }
     const handleSubmit = async e => {
         e.preventDefault();
         try{
+            console.log(email)
             await signin(email,password);
         }catch(err){
             SetError(err.message);

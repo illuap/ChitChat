@@ -22,6 +22,8 @@ header{
     height:    -moz-calc(100% - 100px);
     height:         calc(100% - 100px);
     overflow-y: scroll;
+    padding: 20px;
+    margin-bottom: 10px;
 
 
 }
@@ -29,8 +31,18 @@ header{
 .chat-sent,
 .chat-received{
     width: 100%;
+    h3{
+        margin-left: 10px;
+        margin-bottom: 0;
+    }
     .message{
+        padding: 10px 20px;
         max-width: 500px;
+        border-radius: 20px;
+    }
+    .time{
+        display: inline-block;
+        padding: 10px;
     }
 }
 .chat-sent{
